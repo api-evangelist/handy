@@ -1,0 +1,41 @@
+generated: '2026-07-19'
+method: searched
+source: https://partners.services.handy.com/docs/orders_api
+docs: https://github.com/Handybook/API-Request-Signing
+summary:
+  types: [signed-request]
+  api_key_in: [header]
+  oauth2_flows: []
+  note: >-
+    The Handy Partner API does not use a standard OpenAPI securityScheme (the
+    published Swagger declares no securityDefinitions). Authentication is a
+    custom per-request RSA-SHA256 signature scheme documented on the partner
+    docs site and in the first-party Handybook/API-Request-Signing repo.
+schemes:
+- name: HandySignedRequest
+  type: custom
+  scheme: rsa-sha256-signed-request
+  in: header
+  headers:
+  - name: HDY-PARTNER-ID
+    description: The partner identifier issued by Handy.
+  - name: HDY-TIMESTAMP
+    description: Seconds since epoch (UTC) at request time; signed to prevent replay.
+  - name: HDY-SIGNATURE
+    description: >-
+      base64(rsa_sha256(private_key, PARTNER_ID + "\n" + URL + "\n" +
+      HTTP_METHOD + "\n" + TIMESTAMP + "\n" + PAYLOAD)). RSA private key issued
+      to the partner; Handy holds the public key.
+  signing_string: 'PARTNER_ID \n URL \n HTTP_METHOD \n TIMESTAMP \n PAYLOAD'
+  algorithm: RSA-SHA256 (PKCS1v15)
+  examples_repo: https://github.com/Handybook/API-Request-Signing
+  example_languages: [python, javascript, php, ruby, java, csharp]
+  properties:
+  - impersonation_prevented: private key never leaves the partner
+  - replay_prevented: signed timestamp
+  - tampering_prevented: signed payload
+onboarding:
+  contact: partners-eng@handy.com
+  note: Contact Handy partner engineering to obtain sandbox access and a keypair.
+sources:
+- openapi/handy-orders-openapi.json
