@@ -1,0 +1,83 @@
+swagger: '2.0'
+info:
+  title: Handy’s Partner Bookings Testing API
+  description: "<p>The Handy Partner API offers retailers fixed price installation\nservices that can be added to their eCommerce site or in-store checkout experience.\nTo start using the Handy Partner API, contact partners-eng@handy.com in order to\n        get access to the Sandbox.</p>\n        <p>Once you are ready to move to prod, we will walk you through quick authentication steps.</p>"
+  version: v1
+  contact: partnerships@handy.com
+host: partners.services.handy.com
+schemes:
+- https
+tags:
+- name: Testing
+paths:
+  /api/v1/orders/echo:
+    post:
+      summary: Display passed params
+      tags:
+      - Testing
+      description: Use this endpoint to ensure that request signing is correctly implemented.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: HDY-PARTNER-ID
+        in: header
+        type: string
+        description: Your assigned partner ID
+        example: partner_name
+      - name: HDY-TIMESTAMP
+        in: header
+        type: string
+        description: Seconds since epoch UTC
+        example: '1525361611'
+      - name: HDY-SIGNATURE
+        in: header
+        type: string
+        description: 'Signature generated using your private key.
+
+          Click <a href=''https://github.com/Handybook/API-Request-Signing'' target=''_blank''>here</a> to learn how.'
+        example: OF5xI0LbLXHkFBLyNa8l..XHk=
+      responses:
+        '200':
+          description: success
+          schema:
+            type: object
+          examples:
+            application/json:
+              message: test
+    get:
+      summary: Display passed params
+      tags:
+      - Testing
+      description: Use this endpoint to ensure that request signing is correctly implemented.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: HDY-PARTNER-ID
+        in: header
+        type: string
+        description: Your assigned partner ID
+        example: partner_name
+      - name: HDY-TIMESTAMP
+        in: header
+        type: string
+        description: Seconds since epoch UTC
+        example: '1525361611'
+      - name: HDY-SIGNATURE
+        in: header
+        type: string
+        description: 'Signature generated using your private key.
+
+          Click <a href=''https://github.com/Handybook/API-Request-Signing'' target=''_blank''>here</a> to learn how.'
+        example: OF5xI0LbLXHkFBLyNa8l..XHk=
+      responses:
+        '200':
+          description: success
+          schema:
+            type: object
+          examples:
+            application/json:
+              message: test

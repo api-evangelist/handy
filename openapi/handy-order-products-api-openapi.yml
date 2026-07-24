@@ -1,0 +1,286 @@
+swagger: '2.0'
+info:
+  title: Handy’s Partner Bookings Order Products API
+  description: "<p>The Handy Partner API offers retailers fixed price installation\nservices that can be added to their eCommerce site or in-store checkout experience.\nTo start using the Handy Partner API, contact partners-eng@handy.com in order to\n        get access to the Sandbox.</p>\n        <p>Once you are ready to move to prod, we will walk you through quick authentication steps.</p>"
+  version: v1
+  contact: partnerships@handy.com
+host: partners.services.handy.com
+schemes:
+- https
+tags:
+- name: Order Products
+paths:
+  /api/v1/orders/products/{id}:
+    delete:
+      summary: DESTROY
+      description: "Cancel the booking created by the order request. It finds the order using the **external id** of product. This external id corresponds to the `order_product_id` provided when the order gets created. For multi-line orders it cancels all the bookings related to the order, no matter which `order_product_id` is provided. \n\n No webhooks are sent if the cancellation is successful. If the cancellation happens within 24 hours of the start time a cancellation fee is charged. \n\n Reason can be provided in the request body optionally. Reason must be one of `['partner_delivery_delayed', 'partner_damaged_product', 'partner_self_assembled', 'partner_returned_item', 'partner_missing_pieces', 'reschedule_consolidation']`"
+      tags:
+      - Order Products
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: HDY-PARTNER-ID
+        in: header
+        type: string
+        description: Your assigned partner ID
+        example: partner_name
+      - name: HDY-TIMESTAMP
+        in: header
+        type: string
+        description: Seconds since epoch UTC
+        example: '1525361611'
+      - name: HDY-SIGNATURE
+        in: header
+        type: string
+        description: 'Signature generated using your private key.
+
+          Click <a href=''https://github.com/Handybook/API-Request-Signing'' target=''_blank''>here</a> to learn how.'
+        example: OF5xI0LbLXHkFBLyNa8l..XHk=
+      - name: id
+        in: path
+        type: string
+        description: Order product external_id
+        default: ''
+        example: '1234567890'
+        required: true
+      - name: reason
+        in: query
+        description: This is optional. It indicates the reason for cancelling the order. Default is `partner_returned_item`.
+        type: string
+        example: partner_returned_item
+      responses:
+        '200':
+          description: Order Booking(product) cancelled
+          schema:
+            type: object
+            $ref: '#/definitions/order_product_response_cancel_product'
+        '400':
+          description: Reason not found if reason provided is not in the list above
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Reason not found
+              code:
+                type: string
+                example: invalid_request_parameter
+              error_uuid:
+                $ref: '#/definitions/error_uuid'
+            required:
+            - message
+            - code
+            - error_uuid
+        '404':
+          description: Order product not found
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: The order was not found.
+              code:
+                type: string
+                example: order_not_found
+              more_info:
+                type: string
+                example: The order was not found
+              error_uuid:
+                $ref: '#/definitions/error_uuid'
+            required:
+            - message
+            - code
+            - error_uuid
+        '500':
+          description: Booking has already been completed.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Booking has already been completed.
+              code:
+                type: string
+                example: booking_cannot_be_cancelled
+              error_uuid:
+                $ref: '#/definitions/error_uuid'
+            required:
+            - message
+            - code
+            - error_uuid
+  /api/v1/orders/{partner_order_id}/line_items/{line_no}/cancel:
+    post:
+      summary: CANCEL
+      description: "Cancel the booking given the `line_item` and `partner_order_id`. For multi-line bookings it cancels all the associated products given the correct `partner_order_id` and `line_item`. The behavior of this endpoint is the same as the DESTROY one above. \n\n No webhooks are sent if the cancellation is successful. If the cancellation happens within 24 hours of the start time a cancellation fee is charged. \n\n Reason can be provided in the request body optionally. Reason must be one of `['partner_delivery_delayed', 'partner_damaged_product', 'partner_self_assembled', 'partner_returned_item', 'partner_missing_pieces', 'reschedule_consolidation']`"
+      tags:
+      - Order Products
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: HDY-PARTNER-ID
+        in: header
+        type: string
+        description: Your assigned partner ID
+        example: partner_name
+      - name: HDY-TIMESTAMP
+        in: header
+        type: string
+        description: Seconds since epoch UTC
+        example: '1525361611'
+      - name: HDY-SIGNATURE
+        in: header
+        type: string
+        description: 'Signature generated using your private key.
+
+          Click <a href=''https://github.com/Handybook/API-Request-Signing'' target=''_blank''>here</a> to learn how.'
+        example: OF5xI0LbLXHkFBLyNa8l..XHk=
+      - name: partner_order_id
+        in: path
+        type: string
+        description: Order external_id
+        default: ''
+        example: '1234567890'
+        required: true
+      - name: line_no
+        in: path
+        type: string
+        description: Order product line_number
+        default: ''
+        example: '1'
+        required: true
+      - name: reason
+        in: query
+        type: string
+        description: A reason for cancellation (optional)
+        default: ''
+        example: partner_returned_item
+      responses:
+        '200':
+          description: Order Booking(product) cancelled
+          schema:
+            type: object
+            $ref: '#/definitions/order_product_response_cancel_product'
+        '404':
+          description: Order or Order product line_number not found
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Order Order product line_number not found
+              code:
+                type: string
+                example: order_product_not_found
+              error_uuid:
+                $ref: '#/definitions/error_uuid'
+            required:
+            - message
+            - code
+            - error_uuid
+        '400':
+          description: Reason not found if reason provided is not in the list above
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Reason not found
+              code:
+                type: string
+                example: invalid_request_parameter
+              error_uuid:
+                $ref: '#/definitions/error_uuid'
+            required:
+            - message
+            - code
+            - error_uuid
+        '500':
+          description: Booking has already been completed.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Booking has already been completed.
+              code:
+                type: string
+                example: booking_cannot_be_cancelled
+              error_uuid:
+                $ref: '#/definitions/error_uuid'
+            required:
+            - message
+            - code
+            - error_uuid
+definitions:
+  error_uuid:
+    type: string
+    example: 90938b23-749f-4f66-972b-43ea3a7ca7f6
+  sku:
+    type: string
+    example: HANDY1234
+    description: The product identifier that has been allocated to the product you are submitting on this order request.
+  order_product_response_cancel_product:
+    type: object
+    properties:
+      order_product_id:
+        type: string
+        example: wv3r2o7el14gj06
+      partner_order_id:
+        type: string
+        example: '110001023'
+      order_date:
+        type: string
+        example: '2018-10-22T12:11:50.000Z'
+      booking_id:
+        type: string
+        example: dj327393v614875
+      sku:
+        $ref: '#/definitions/sku'
+      name:
+        type: string
+        example: Product name
+      line_number:
+        type: integer
+        example: 1
+        x-nullable: true
+      quantity:
+        type: integer
+        example: 1
+      charge_amount_in_cents:
+        type: integer
+        x-nullable: true
+      charge_currency:
+        type: string
+        x-nullable: true
+      product_status:
+        type: string
+        example: complete
+      delivery_date:
+        type: string
+        example: '2018-07-26'
+        x-nullable: true
+      service_date:
+        type: string
+        example: '2018-07-26'
+        x-nullable: true
+      service_datetime:
+        type: string
+        example: '2018-05-02T22:21:49.000Z'
+        x-nullable: true
+      error:
+        type: string
+        example: null
+        x-nullable: true
+        description: This will be null if the order is successfully cancelled as this field relates to the `processing_status` when creating the products
+    required:
+    - order_product_id
+    - partner_order_id
+    - order_date
+    - booking_id
+    - sku
+    - name
+    - quantity

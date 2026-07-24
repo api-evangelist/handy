@@ -1,0 +1,161 @@
+swagger: '2.0'
+info:
+  title: Handy’s Partner Bookings API
+  description: "<p>The Handy Partner API offers retailers fixed price installation\nservices that can be added to their eCommerce site or in-store checkout experience.\nTo start using the Handy Partner API, contact partners-eng@handy.com in order to\n        get access to the Sandbox.</p>\n        <p>Once you are ready to move to prod, we will walk you through quick authentication steps.</p>"
+  version: v1
+  contact: partnerships@handy.com
+host: partners.services.handy.com
+schemes:
+- https
+tags:
+- name: Bookings
+paths:
+  /api/v1/bookings/{id}:
+    get:
+      summary: SHOW
+      tags:
+      - Bookings
+      description: "This endpoint provides information for a booking which has been scheduled for an Angi service.\n It takes in a booking ID as a path parameter and returns details about this booking. \nThe booking ID associated with a purchased service can be retrieved using the following endpoints:\n* [/api/v1/orders/{partner_order_id}](#tag/Orders/paths/~1api~1v1~1orders~1{partner_order_id}/get) \n* [/api/v1/orders](#tag/Orders/paths/~1api~1v1~1orders/get)"
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: HDY-PARTNER-ID
+        in: header
+        type: string
+        description: Your assigned partner ID
+        example: partner_name
+      - name: HDY-TIMESTAMP
+        in: header
+        type: string
+        description: Seconds since epoch UTC
+        example: '1525361611'
+      - name: HDY-SIGNATURE
+        in: header
+        type: string
+        description: 'Signature generated using your private key.
+
+          Click <a href=''https://github.com/Handybook/API-Request-Signing'' target=''_blank''>here</a> to learn how.'
+        example: OF5xI0LbLXHkFBLyNa8l..XHk=
+      - name: id
+        in: path
+        type: string
+        required: true
+        description: The Booking's id
+        example: dj327393v614875
+      responses:
+        '200':
+          description: Booking found
+          schema:
+            type: object
+            $ref: '#/definitions/booking_response'
+        '400':
+          description: Bad Request. Check auth credentials for your partner.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Access denied.
+              code:
+                type: string
+                example: forbidden_access_denied
+              error_uuid:
+                $ref: '#/definitions/error_uuid'
+              more_info:
+                type: object
+                example:
+                  code: forbidden_access_denied
+                  data:
+                  - detail: Forbidden.
+        '404':
+          description: Booking not found
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Not found
+              code:
+                type: string
+                example: booking_not_found
+              more_info:
+                type: string
+                example: An unexpected error has occurred.
+              error_uuid:
+                type: string
+                $ref: '#/definitions/error_uuid'
+        '500':
+          description: Internal Server Error - This can be caused by an unexpected error on our end. Please contact angi team if the problem persists.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Internal Server Error
+              code:
+                type: string
+                example: internal_server_error
+              more_info:
+                type: string
+                example: An unexpected error has occurred.
+              error_uuid:
+                type: string
+                $ref: '#/definitions/error_uuid'
+definitions:
+  error_uuid:
+    type: string
+    example: 90938b23-749f-4f66-972b-43ea3a7ca7f6
+  provider:
+    type: object
+    properties:
+      id:
+        type: string
+        example: jxyzrlmjx931gl2
+        description: This is the unique identifier for the provider.
+      name:
+        type: string
+        example: John G.
+        description: This is the name of the provider.
+      profile_url:
+        type: string
+        example: https://www.handy.com/profiles/JOHN0840
+        description: This is a URL to the provider's profile.
+  booking_response:
+    type: object
+    properties:
+      id:
+        type: string
+        example: dj327393v614875
+        description: This is the unique identifier for the booking.
+      starts_at:
+        type: string
+        example: '2018-05-08T19:00:00.000Z'
+        description: This is the datetime that the booking is scheduled for.
+      time_zone:
+        type: string
+        example: America/New_York
+        description: This is the time zone the starts_at time is in.
+      duration_seconds:
+        type: integer
+        example: 10800
+        description: This is the duration of the booking in seconds.
+      user_id:
+        type: string
+        example: lzo7rddjn8krnjm
+        description: This is the unique identifier for the user this booking is scheduled for.
+      provider_id:
+        type: string
+        example: jxyzrlmjx931gl2
+        description: This is the unique identifier for the provider this booking is assigned to.
+      provider:
+        $ref: '#/definitions/provider'
+    required:
+    - duration_seconds
+    - id
+    - provider
+    - provider_id
+    - starts_at
+    - time_zone
+    - user_id
