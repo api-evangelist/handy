@@ -1,0 +1,27 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/handy-orders-openapi.json
+standards:
+- id: openapi
+  conforms: true
+  evidence: Published Swagger 2.0 document for the Orders API.
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme; auth is a custom RSA-SHA256 signed-request scheme.
+- id: oidc
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a custom {message,code,error_uuid,more_info} envelope, not application/problem+json.
+- id: rfc9116-security-txt
+  conforms: true
+  evidence: /.well-known/security.txt present (Contact infosec@angi.com).
+- id: webhooks
+  conforms: true
+  evidence: Versioned booking lifecycle callbacks published as a Swagger notifications document.
+- id: pagination
+  conforms: false
+  evidence: No cursor/offset pagination documented.
+- id: idempotency
+  conforms: false
+  evidence: No idempotency-key contract; partner_order_id provides natural de-duplication only.

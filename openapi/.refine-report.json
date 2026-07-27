@@ -1,0 +1,20 @@
+{
+  "provider": "handy",
+  "sources": [
+    "handy-bookings-api-openapi.yml",
+    "handy-order-products-api-openapi.yml",
+    "handy-orders-api-openapi.yml",
+    "handy-testing-api-openapi.yml"
+  ],
+  "outputs": [
+    "handy-bookings-api-openapi.yml",
+    "handy-order-products-api-openapi.yml",
+    "handy-orders-api-openapi.yml",
+    "handy-testing-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

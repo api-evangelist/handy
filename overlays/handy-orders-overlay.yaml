@@ -1,0 +1,16 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Handy Partner API
+  version: 1.0.0
+extends: openapi/handy-orders-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: handy
+    x-apievangelist-auth: RSA-SHA256 signed request (HDY-PARTNER-ID / HDY-TIMESTAMP / HDY-SIGNATURE)
+    x-apievangelist-error-envelope: '{message, code, error_uuid, more_info}'
+    x-apievangelist-webhooks: asyncapi/handy-webhooks.yml
+    x-apievangelist-sandbox: services.handy-sandbox.com
+    x-apievangelist-notes: >-
+      Swagger 2.0 declares no securityDefinitions; authentication is a custom
+      signed-request scheme documented externally. Operations lack operationIds.

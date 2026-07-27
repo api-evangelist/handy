@@ -1,0 +1,20 @@
+generated: '2026-07-19'
+method: searched
+source: live probe of https://www.handy.com/.well-known/*
+host: https://www.handy.com
+documents:
+- path: /.well-known/security.txt
+  status: 200
+  file: handy-security.txt
+- path: /.well-known/openid-configuration
+  status: 404
+- path: /.well-known/oauth-authorization-server
+  status: 404
+- path: /.well-known/api-catalog
+  status: 404
+- path: /.well-known/ai-plugin.json
+  status: 404
+notes: >-
+  handy.com (part of Angi / ANGI Homeservices) publishes an RFC 9116 security.txt
+  whose Contact points to Angi's infosec team. No OIDC/OAuth discovery, API
+  catalog, or AI-plugin manifest is published.

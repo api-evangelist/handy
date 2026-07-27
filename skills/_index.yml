@@ -1,0 +1,13 @@
+generated: '2026-07-19'
+method: generated
+source: openapi/handy-orders-openapi.json
+skills:
+- file: handy-create-installation-order.md
+  name: Create and track a Handy installation order
+  api: openapi/handy-orders-openapi.json
+  operations:
+  - POST /api/v1/orders
+  - GET /api/v1/orders/{partner_order_id}
+  - GET /api/v1/bookings/{id}
+  - PATCH /api/v1/orders/{partner_order_id}
+  - DELETE /api/v1/orders/{partner_order_id}

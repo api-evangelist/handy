@@ -1,0 +1,28 @@
+# Handy
+
+> Handy (part of Angi / ANGI Homeservices) is a home-services marketplace connecting customers with pre-screened professionals for cleaning, handyman work, furniture assembly, and in-home installations. Its Partner API lets retailers attach fixed-price installation and service bookings to an eCommerce or in-store checkout.
+
+## APIs
+- [Handy Partner Orders API](https://partners.services.handy.com/docs/orders_api): Create and manage orders, products, line items, and bookings (Swagger 2.0).
+- [Handy Webhooks](https://partners.services.handy.com/docs/webhooks): Booking lifecycle callbacks (rescheduled, completed, cancelled, service fulfilled, job claim assigned).
+
+## Specs
+- [Orders OpenAPI (Swagger 2.0)](openapi/handy-orders-openapi.json)
+- [Webhooks / notifications spec](asyncapi/handy-bookings-notifications-swagger.json)
+- [Webhook event catalog](asyncapi/handy-webhooks.yml)
+
+## Reference
+- [Authentication (RSA-SHA256 signed requests)](authentication/handy-authentication.yml)
+- [Request-signing examples (GitHub)](https://github.com/Handybook/API-Request-Signing)
+- [API conventions](conventions/handy-conventions.yml)
+- [Error catalog](errors/handy-problem-types.yml)
+- [Data model](data-model/handy-data-model.yml)
+- [Lifecycle & versioning](lifecycle/handy-lifecycle.yml)
+- [Sandbox](sandbox/handy-sandbox.yml)
+- [Agent skill: create an installation order](skills/handy-create-installation-order.md)
+
+## Docs
+- [Handy home](https://www.handy.com/)
+- [About Handy](https://www.handy.com/about)
+- [Help Center](https://help.handy.com/)
+- [security.txt](well-known/handy-security.txt)

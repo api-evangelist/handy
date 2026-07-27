@@ -1,25 +1,174 @@
 aid: handy
 name: handy
-description: handy is a company surfaced as a portfolio company of slow-ventures and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Handy is a home-services marketplace, now part of Angi (ANGI Homeservices), that
+  connects customers with pre-screened independent professionals for house cleaning,
+  handyman work, furniture assembly, and in-home installations. Handy's Partner API
+  lets retailers offer fixed-price installation and service bookings at eCommerce or
+  in-store checkout: partners create and manage orders, products, and line items,
+  retrieve bookings and their assigned providers, and receive booking-lifecycle
+  webhooks. Requests are authenticated with a custom RSA-SHA256 signed-request scheme.
 url: https://raw.githubusercontent.com/api-evangelist/handy/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - slow-ventures
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: active
+x-tier-reason: partner-api-enriched
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
+image: https://www.handy.com/favicon.ico
 tags:
 - Company
-apis: []
+- Home Services
+- Marketplace
+- Cleaning
+- Handyman
+- Installations
+- On-Demand
+- Gig Economy
+- Orders
+- Webhooks
+- Retail
+- Angi
+apis:
+- aid: handy:handy-bookings-api
+  name: handy Bookings API
+  description: The Bookings API from handy — 1 operation(s) for bookings.
+  humanURL: https://partners.services.handy.com/docs/orders_api
+  baseURL: https://partners.services.handy.com/api/v1
+  tags:
+  - Bookings
+  properties:
+  - type: OpenAPI
+    url: openapi/handy-bookings-api-openapi.yml
+  - type: APIReference
+    url: https://partners.services.handy.com/docs/orders_api
+  - type: Documentation
+    url: https://partners.services.handy.com/docs/orders_api
+  - type: Webhooks
+    url: asyncapi/handy-webhooks.yml
+- aid: handy:handy-order-products-api
+  name: handy Order Products API
+  description: The Order Products API from handy — 2 operation(s) for order products.
+  humanURL: https://partners.services.handy.com/docs/orders_api
+  baseURL: https://partners.services.handy.com/api/v1
+  tags:
+  - Order Products
+  properties:
+  - type: OpenAPI
+    url: openapi/handy-order-products-api-openapi.yml
+  - type: APIReference
+    url: https://partners.services.handy.com/docs/orders_api
+  - type: Documentation
+    url: https://partners.services.handy.com/docs/orders_api
+  - type: Webhooks
+    url: asyncapi/handy-webhooks.yml
+- aid: handy:handy-orders-api
+  name: handy Orders API
+  description: The Orders API from handy — 2 operation(s) for orders.
+  humanURL: https://partners.services.handy.com/docs/orders_api
+  baseURL: https://partners.services.handy.com/api/v1
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/handy-orders-api-openapi.yml
+  - type: APIReference
+    url: https://partners.services.handy.com/docs/orders_api
+  - type: Documentation
+    url: https://partners.services.handy.com/docs/orders_api
+  - type: Webhooks
+    url: asyncapi/handy-webhooks.yml
+- aid: handy:handy-testing-api
+  name: handy Testing API
+  description: The Testing API from handy — 1 operation(s) for testing.
+  humanURL: https://partners.services.handy.com/docs/orders_api
+  baseURL: https://partners.services.handy.com/api/v1
+  tags:
+  - Testing
+  properties:
+  - type: OpenAPI
+    url: openapi/handy-testing-api-openapi.yml
+  - type: APIReference
+    url: https://partners.services.handy.com/docs/orders_api
+  - type: Documentation
+    url: https://partners.services.handy.com/docs/orders_api
+  - type: Webhooks
+    url: asyncapi/handy-webhooks.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgenticAccess
+  url: agentic-access/handy-agentic-access.yml
+- type: DeveloperPortal
+  url: https://partners.services.handy.com/docs/orders_api
+- type: Documentation
+  url: https://partners.services.handy.com/docs/orders_api
+- type: APIReference
+  url: https://partners.services.handy.com/docs/orders_api
+- type: GitHubOrganization
+  url: https://github.com/Handybook
+- type: Support
+  url: https://help.handy.com/
+- type: TermsOfService
+  url: https://www.handy.com/terms
+- type: PrivacyPolicy
+  url: https://www.handy.com/privacy
+- type: Authentication
+  url: authentication/handy-authentication.yml
+- type: Conventions
+  url: conventions/handy-conventions.yml
+- type: ErrorCatalog
+  url: errors/handy-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/handy-lifecycle.yml
+- type: DataModel
+  url: data-model/handy-data-model.yml
+- type: Conformance
+  url: conformance/handy-conformance.yml
+- type: Sandbox
+  url: sandbox/handy-sandbox.yml
+- type: Webhooks
+  url: asyncapi/handy-webhooks.yml
+- type: MCPServer
+  url: mcp/handy-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/handy-llms.txt
+- type: Overlay
+  url: overlays/handy-orders-overlay.yaml
+- type: WellKnown
+  url: well-known/handy-well-known.yml
+- type: SecurityTxt
+  url: well-known/handy-security.txt
+- type: Security
+  url: https://www.handy.com/.well-known/security.txt
+- type: VulnerabilityDisclosure
+  url: security/handy-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/handy-domain-security.yml
 - type: Website
   url: https://handy.com
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

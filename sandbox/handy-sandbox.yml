@@ -1,0 +1,23 @@
+generated: '2026-07-19'
+method: searched
+source: https://github.com/Handybook/API-Request-Signing
+docs: https://partners.services.handy.com/docs/orders_api
+note: >-
+  Handy runs a separate sandbox environment for partners. Access (and a signing
+  keypair) is granted by contacting partners-eng@handy.com. No published test
+  card / magic-value fixtures were found; the sandbox is a full separate host
+  reached with the same signed-request auth.
+environments:
+- name: sandbox
+  hosts:
+  - services.handy-sandbox.com
+  - svccompaniesapi.services.handy-sandbox.com
+  auth: RSA-SHA256 signed request (same scheme as production)
+  onboarding_contact: partners-eng@handy.com
+- name: production
+  hosts:
+  - partners.services.handy.com
+  - svccompaniesapi.services.handy.com
+test_values:
+  documented: false
+  note: No published static test identifiers were found in the public docs or examples.

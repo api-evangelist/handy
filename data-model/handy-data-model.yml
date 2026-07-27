@@ -1,0 +1,42 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/handy-orders-openapi.json
+note: >-
+  Entity graph derived from the Handy Partner API Swagger definitions. Handy sells
+  fixed-price in-home installation/service bookings that a retailer attaches to an
+  order at eCommerce or in-store checkout.
+entities:
+- name: Order
+  id_field: partner_order_id
+  id_note: caller-supplied partner order id
+  fields: [partner_order_id, metadata, products]
+  relationships:
+  - {kind: has_many, target: Product, via: products}
+  - {kind: has_one, target: Metadata, via: metadata}
+  - {kind: has_many, target: Booking, via: products.bookings}
+- name: Product
+  fields: [sku, order_details, delivery_info]
+  relationships:
+  - {kind: has_one, target: SKU, via: sku}
+  - {kind: has_many, target: OrderDetail, via: order_details}
+  - {kind: has_one, target: DeliveryInfo, via: delivery_info}
+- name: OrderDetail
+  fields: [quantity, delivery_date, service_date, service_datetime, price_amount_in_cents, charge_amount_in_cents, charge_currency, line_number]
+- name: Booking
+  id_field: id
+  fields: [id, starts_at, time_zone, duration_seconds, user_id, provider_id, provider]
+  relationships:
+  - {kind: belongs_to, target: User, via: user_id}
+  - {kind: has_one, target: Provider, via: provider}
+- name: Provider
+  id_field: id
+  fields: [id, name, profile_url]
+- name: User
+  fields: [email, first_name, last_name, phone_number]
+- name: Address
+  fields: [address1, address2, city, state, country, zipcode, type]
+- name: SchedulingDetails
+  fields: [date_type, date]
+- name: SKU
+- name: Metadata
+- name: DeliveryInfo

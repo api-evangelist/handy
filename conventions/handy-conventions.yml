@@ -1,0 +1,50 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/handy-orders-openapi.json
+docs: https://partners.services.handy.com/docs/orders_api
+authentication:
+  style: signed-request
+  detail: RSA-SHA256 signed headers (HDY-PARTNER-ID / HDY-TIMESTAMP / HDY-SIGNATURE)
+  see: authentication/handy-authentication.yml
+versioning:
+  scheme: uri-path
+  current: v1
+  detail: >-
+    Order API operations are namespaced under /api/v1. Webhook callback payloads
+    are independently versioned (v2 / v3 / v5) per event type.
+  see: lifecycle/handy-lifecycle.yml
+idempotency:
+  supported: false
+  detail: >-
+    No idempotency-key header or parameter is documented. Orders are keyed by a
+    caller-supplied partner_order_id, which provides natural request de-duplication
+    on the Create Order operation (a repeated partner_order_id collides rather than
+    creating a duplicate), but this is not a general idempotency-key contract.
+  natural_key: partner_order_id
+pagination:
+  supported: false
+  detail: Recent Orders (GET /api/v1/orders) returns a recent window; no cursor/offset params are documented.
+identifiers:
+  order: partner_order_id (caller-supplied)
+  booking: id (Handy-issued)
+  line_item: line_number / line_no
+metadata:
+  supported: true
+  detail: Orders carry a free-form metadata object.
+error_envelope:
+  shape: custom
+  fields: [message, code, error_uuid, more_info]
+  content_type: application/json
+  detail: >-
+    Errors return a JSON object with a human message, a machine code (e.g.
+    user_details_invalid), a support-traceable error_uuid, and a more_info map of
+    field-level validation detail. Not RFC 9457 problem+json.
+  see: errors/handy-problem-types.yml
+rate_limiting:
+  documented: false
+webhooks:
+  supported: true
+  detail: Booking lifecycle callbacks delivered to a partner endpoint; see asyncapi/handy-webhooks.yml
+sandbox:
+  supported: true
+  detail: Separate sandbox environment (services.handy-sandbox.com); see sandbox/handy-sandbox.yml

@@ -1,0 +1,43 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/handy-orders-openapi.json
+format: custom
+envelope:
+  content_type: application/json
+  fields:
+  - {name: message, type: string, description: Human-readable error message}
+  - {name: code, type: string, description: Machine-readable error code (e.g. user_details_invalid)}
+  - {name: error_uuid, type: string, description: Unique id for the failed request, for support tracing}
+  - {name: more_info, type: object, description: Field-level validation detail}
+  required: [message, code, error_uuid, more_info]
+  note: Handy uses a custom error envelope; it is not RFC 9457 problem+json.
+problems:
+- status: 400
+  title: Bad request
+  description: Bad request error, check order details passed in on request.
+  example_code: user_details_invalid
+  operations: [createOrder, updateOrder, cancelOrder, cancelLineItem, destroyOrderProduct, getBooking]
+- status: 401
+  title: Unauthorized
+  description: Request signature / partner authentication failed.
+  operations: [createOrder, recentOrders, retrieveOrder]
+- status: 403
+  title: Forbidden
+  description: Partner is not permitted to perform this operation on the order.
+  operations: [updateOrder]
+- status: 404
+  title: Not found
+  description: The referenced order, booking, or product does not exist.
+  operations: [retrieveOrder, updateOrder, cancelOrder, destroyOrderProduct, cancelLineItem, getBooking]
+- status: 409
+  title: Conflict
+  description: The order is in a state that conflicts with the requested operation (e.g. already cancelled).
+  operations: [createOrder, cancelOrder]
+- status: 422
+  title: Unprocessable entity
+  description: Request was well-formed but validation of order fields failed.
+  operations: [createOrder, updateOrder, cancelOrder]
+- status: 500
+  title: Internal server error
+  description: Unexpected server error; the error_uuid can be shared with Handy support.
+  operations: [createOrder, recentOrders, retrieveOrder, updateOrder, cancelOrder, destroyOrderProduct, cancelLineItem, getBooking]

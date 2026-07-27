@@ -1,0 +1,35 @@
+generated: '2026-07-19'
+method: derived
+status: candidate
+source: openapi/handy-orders-openapi.json
+note: >-
+  No official hosted MCP server was found for Handy. This is a CANDIDATE tool list
+  derived one-to-one from the published Handy Partner Orders API operations.
+server:
+  name: handy
+  transport: http
+tools:
+- name: create_order
+  description: Create a Handy service/installation order attached to a partner order.
+  source_operation: openapi/handy-orders-openapi.json#POST /api/v1/orders
+- name: list_recent_orders
+  description: List recently created orders.
+  source_operation: openapi/handy-orders-openapi.json#GET /api/v1/orders
+- name: retrieve_order
+  description: Retrieve a single order by partner_order_id.
+  source_operation: openapi/handy-orders-openapi.json#GET /api/v1/orders/{partner_order_id}
+- name: update_order
+  description: Update an existing order.
+  source_operation: openapi/handy-orders-openapi.json#PATCH /api/v1/orders/{partner_order_id}
+- name: cancel_order
+  description: Cancel an order.
+  source_operation: openapi/handy-orders-openapi.json#DELETE /api/v1/orders/{partner_order_id}
+- name: destroy_order_product
+  description: Remove a product from an order.
+  source_operation: openapi/handy-orders-openapi.json#DELETE /api/v1/orders/products/{id}
+- name: cancel_line_item
+  description: Cancel a single line item on an order.
+  source_operation: openapi/handy-orders-openapi.json#POST /api/v1/orders/{partner_order_id}/line_items/{line_no}/cancel
+- name: get_booking
+  description: Retrieve a booking (scheduled service) by id.
+  source_operation: openapi/handy-orders-openapi.json#GET /api/v1/bookings/{id}

@@ -1,0 +1,25 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/handy-orders-openapi.json
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://partners.services.handy.com/docs/orders_api
+  detail: >-
+    Orders API operations are served under /api/v1. Webhook callback payloads are
+    versioned independently per event type (v2 / v3 / v5 variants exist), so newer
+    payload versions supersede older ones.
+webhook_payload_versions:
+  booking_rescheduled: [v2, v3, v5]
+  booking_completed: [v2, v3, v5]
+  booking_cancelled: [v2, v3, v5]
+  service_fulfilled: [v2, v3]
+  job_claim_assigned: [v2, v3]
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No formal deprecation/sunset policy is published; superseded webhook payload versions are the only observed lifecycle signal.
+sla:
+  url: null
+status_page: null
+status_page_note: handy.statuspage.io exists but is inactive; no live status page found.

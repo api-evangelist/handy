@@ -1,0 +1,33 @@
+generated: '2026-07-19'
+method: searched
+source: https://partners.services.handy.com/api-docs/orders/v1/bookings_notifications_api.json
+docs: https://partners.services.handy.com/docs/webhooks
+spec_type: Webhooks
+raw_spec: asyncapi/handy-bookings-notifications-swagger.json
+note: >-
+  Handy delivers booking-lifecycle callbacks (HTTP POST) to a partner-hosted
+  endpoint. Handy publishes the callback contract as a Swagger 2.0 "Webhooks"
+  document (saved verbatim alongside this file). Each event has multiple payload
+  versions the partner selects at onboarding.
+events:
+- name: booking_rescheduled
+  callback: POST /vN/booking_rescheduled_callback
+  versions: [v2, v3, v5]
+  description: A booking's scheduled time changed.
+- name: booking_completed
+  callback: POST /vN/booking_completed_callback
+  versions: [v2, v3, v5]
+  description: A booking / service was completed.
+- name: booking_cancelled
+  callback: POST /vN/booking_cancelled_callback
+  versions: [v2, v3, v5]
+  description: A booking was cancelled.
+- name: service_fulfilled
+  callback: POST /vN/service_fulfilled_callback
+  versions: [v2, v3]
+  description: A service was fulfilled.
+- name: job_claim_assigned
+  callback: POST /vN/job_claim_assigned_callback
+  versions: [v2, v3]
+  description: A provider claimed / was assigned to the job.
+delivery: HTTP POST to partner callback URL
