@@ -1,0 +1,352 @@
+{
+  "item": [
+    {
+      "id": "0a5ddc89-42d5-49f9-892e-0b4e7ca883b6",
+      "name": "Bookings",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fafaada2-10d9-45cf-9948-b7b3e92aa4d8",
+          "name": "SHOW",
+          "request": {
+            "name": "SHOW",
+            "description": {
+              "content": "This endpoint provides information for a booking which has been scheduled for an Angi service.\n It takes in a booking ID as a path parameter and returns details about this booking. \nThe booking ID associated with a purchased service can be retrieved using the following endpoints:\n* [/api/v1/orders/{partner_order_id}](#tag/Orders/paths/~1api~1v1~1orders~1{partner_order_id}/get) \n* [/api/v1/orders](#tag/Orders/paths/~1api~1v1~1orders/get)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "bookings",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The Booking's id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Your assigned partner ID",
+                "key": "HDY-PARTNER-ID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Seconds since epoch UTC",
+                "key": "HDY-TIMESTAMP",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                "key": "HDY-SIGNATURE",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e130e6bd-5674-42f8-89c6-17ecb0ca3e35",
+              "name": "Booking found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bookings",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Booking's id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Your assigned partner ID",
+                    "key": "HDY-PARTNER-ID",
+                    "value": "partner_name"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Seconds since epoch UTC",
+                    "key": "HDY-TIMESTAMP",
+                    "value": "1525361611"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                    "key": "HDY-SIGNATURE",
+                    "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"duration_seconds\": 10800,\n  \"id\": \"dj327393v614875\",\n  \"provider\": {\n    \"id\": \"jxyzrlmjx931gl2\",\n    \"name\": \"John G.\",\n    \"profile_url\": \"https://www.handy.com/profiles/JOHN0840\"\n  },\n  \"provider_id\": \"jxyzrlmjx931gl2\",\n  \"starts_at\": \"2018-05-08T19:00:00.000Z\",\n  \"time_zone\": \"America/New_York\",\n  \"user_id\": \"lzo7rddjn8krnjm\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4449c80e-f6c5-413c-95c6-2e8caa37ac5c",
+              "name": "Bad Request. Check auth credentials for your partner.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bookings",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Booking's id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Your assigned partner ID",
+                    "key": "HDY-PARTNER-ID",
+                    "value": "partner_name"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Seconds since epoch UTC",
+                    "key": "HDY-TIMESTAMP",
+                    "value": "1525361611"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                    "key": "HDY-SIGNATURE",
+                    "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access denied.\",\n  \"code\": \"forbidden_access_denied\",\n  \"error_uuid\": \"90938b23-749f-4f66-972b-43ea3a7ca7f6\",\n  \"more_info\": {\n    \"code\": \"forbidden_access_denied\",\n    \"data\": [\n      {\n        \"detail\": \"Forbidden.\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f504e0e-a77c-4498-973f-17996fde132a",
+              "name": "Booking not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bookings",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Booking's id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Your assigned partner ID",
+                    "key": "HDY-PARTNER-ID",
+                    "value": "partner_name"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Seconds since epoch UTC",
+                    "key": "HDY-TIMESTAMP",
+                    "value": "1525361611"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                    "key": "HDY-SIGNATURE",
+                    "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Not found\",\n  \"code\": \"booking_not_found\",\n  \"more_info\": \"An unexpected error has occurred.\",\n  \"error_uuid\": \"90938b23-749f-4f66-972b-43ea3a7ca7f6\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a660ad0f-9834-45b3-b13b-a9d32747a64b",
+              "name": "Internal Server Error - This can be caused by an unexpected error on our end. Please contact angi team if the problem persists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bookings",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Booking's id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Your assigned partner ID",
+                    "key": "HDY-PARTNER-ID",
+                    "value": "partner_name"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Seconds since epoch UTC",
+                    "key": "HDY-TIMESTAMP",
+                    "value": "1525361611"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                    "key": "HDY-SIGNATURE",
+                    "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal Server Error\",\n  \"code\": \"internal_server_error\",\n  \"more_info\": \"An unexpected error has occurred.\",\n  \"error_uuid\": \"90938b23-749f-4f66-972b-43ea3a7ca7f6\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://partners.services.handy.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "560611f8-a57b-4116-8277-9cf143fe0c1a",
+    "name": "Handy’s Partner Bookings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "<p>The Handy Partner API offers retailers fixed price installation\nservices that can be added to their eCommerce site or in-store checkout experience.\nTo start using the Handy Partner API, contact partners-eng@handy.com in order to\n        get access to the Sandbox.</p>\n        <p>Once you are ready to move to prod, we will walk you through quick authentication steps.</p>",
+      "type": "text/plain"
+    }
+  }
+}

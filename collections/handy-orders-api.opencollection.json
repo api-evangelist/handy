@@ -1,0 +1,205 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Handy’s Partner Bookings Orders API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Recent Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/orders",
+            "headers": [
+              {
+                "name": "HDY-PARTNER-ID",
+                "value": "partner_name"
+              },
+              {
+                "name": "HDY-TIMESTAMP",
+                "value": "1525361611"
+              },
+              {
+                "name": "HDY-SIGNATURE",
+                "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+              }
+            ],
+            "params": [
+              {
+                "name": "size",
+                "value": "1",
+                "type": "query",
+                "description": "Number of orders per page (optional, used for pagination. See endpoint description above for more info)."
+              },
+              {
+                "name": "page",
+                "value": "2",
+                "type": "query",
+                "description": "Page number for paginated list of orders (optional, see endpoint description above for more info)."
+              },
+              {
+                "name": "order_id",
+                "value": "110001023",
+                "type": "query",
+                "description": "Filter orders by `partner_order_id` that was passed in on the order creation request (optional)."
+              },
+              {
+                "name": "user_id",
+                "value": "xzvdfhryhbdbe",
+                "type": "query",
+                "description": "Filter orders by `user_id` (optional). This is the same `user_id` that is returned in the response from order creation. "
+              },
+              {
+                "name": "booking_guid",
+                "value": "w813v41k6lxzj5g",
+                "type": "query",
+                "description": "Filter orders by booking_guid (optional). This is the same ID that is returned in the `booking_id` field on order creation."
+              }
+            ]
+          },
+          "docs": "Get a list of partner specific orders created in the API. A useful aspect of this endpoint is that you can check the status of an order that has been submitted as well as receiving the status of each individual `order_product` within the parent order. The endpoint is flexible in that you can query based on `order_id` (same as `partner_order_id`), `user_id` (the ID assigned to the consumer upon order creation and returned to the partner in the response), `booking_guid` (the ID assigned to the boo"
+        },
+        {
+          "info": {
+            "name": "Create Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/orders",
+            "headers": [
+              {
+                "name": "HDY-PARTNER-ID",
+                "value": "partner_name"
+              },
+              {
+                "name": "HDY-TIMESTAMP",
+                "value": "1525361611"
+              },
+              {
+                "name": "HDY-SIGNATURE",
+                "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+              }
+            ]
+          },
+          "docs": "Creates an order using one or more product SKUs that correspond to Angi services.\n\n ### Multi-Item Orders \n **Multiple items with the same product SKU** - If a customer purchased multiple Angi services with the **same** product SKU in a single basket, **only create one object for this product SKU** in the `products` array and indicate the quantity within the product object in the `product[:order_details][:quantity]` field. \n\n *Example of three products with the same SKU (quantity set on `order_d"
+        },
+        {
+          "info": {
+            "name": "Retrieve Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/orders/:partner_order_id",
+            "headers": [
+              {
+                "name": "HDY-PARTNER-ID",
+                "value": "partner_name"
+              },
+              {
+                "name": "HDY-TIMESTAMP",
+                "value": "1525361611"
+              },
+              {
+                "name": "HDY-SIGNATURE",
+                "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+              }
+            ],
+            "params": [
+              {
+                "name": "partner_order_id",
+                "value": "110001023",
+                "type": "path",
+                "description": "The `partner_order_id` that was used on order creation."
+              }
+            ]
+          },
+          "docs": "Retrieve information about an order by `partner_order_id`. A useful aspect of this endpoint is that you can check the status of an order that has been submitted as well as receiving the status of each individual `order_product` within the parent order."
+        },
+        {
+          "info": {
+            "name": "Update Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/orders/:partner_order_id",
+            "headers": [
+              {
+                "name": "HDY-PARTNER-ID",
+                "value": "partner_name"
+              },
+              {
+                "name": "HDY-TIMESTAMP",
+                "value": "1525361611"
+              },
+              {
+                "name": "HDY-SIGNATURE",
+                "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+              }
+            ],
+            "params": [
+              {
+                "name": "partner_order_id",
+                "value": "110001023xx455",
+                "type": "path",
+                "description": "The partner_order_id that was used to create the order."
+              }
+            ]
+          },
+          "docs": "Update `delivery_date`, `service_date` or `service_datetime` for products or service bookings associated with an order in the `scheduling_details` object. \n\n ### Multi-Item Orders \n\n When an order is originally created with multiple items, items that have a SKU that maps to the same service these will already be created as one booking. In the case of multiple products in the cart with SKUs that map to different services, multiple bookings will have been created. If the multi-item orders have not"
+        },
+        {
+          "info": {
+            "name": "Cancel",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/orders/:partner_order_id",
+            "headers": [
+              {
+                "name": "HDY-PARTNER-ID",
+                "value": "partner_name"
+              },
+              {
+                "name": "HDY-TIMESTAMP",
+                "value": "1525361611"
+              },
+              {
+                "name": "HDY-SIGNATURE",
+                "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "110001023",
+                "type": "path",
+                "description": "The Order's id"
+              },
+              {
+                "name": "reason",
+                "value": "partner_returned_item",
+                "type": "query",
+                "description": "A reason for cancellation (optional). If passing a reason parameter it should be valid else will result in reason_not_found"
+              }
+            ]
+          },
+          "docs": "The endpoint can be used to cancel a order which in turn will cancel bookings associated with the order. \n Endpoint has some restrictions which would mean a booking cannot be cancelled. Some of the restrictions are as follows `order_already_cancelled`, `booking_already_cancelled`, `booking_already_completed`, `booking_already_started`, can see the examples in the `422` block. \n\n **Note** The Api endpoint is a blanket delete call to cancel all bookings associated with an order, continue reading f"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -2,9 +2,8 @@ generated: '2026-07-19'
 method: derived
 status: candidate
 source: openapi/handy-orders-openapi.json
-note: >-
-  No official hosted MCP server was found for Handy. This is a CANDIDATE tool list
-  derived one-to-one from the published Handy Partner Orders API operations.
+note: No official hosted MCP server was found for Handy. This is a CANDIDATE tool list derived one-to-one
+  from the published Handy Partner Orders API operations.
 server:
   name: handy
   transport: http
@@ -33,3 +32,9 @@ tools:
 - name: get_booking
   description: Retrieve a booking (scheduled service) by id.
   source_operation: openapi/handy-orders-openapi.json#GET /api/v1/bookings/{id}
+deployment:
+  mode: none
+  verified: derived
+  tools: 8
+  checked: '2026-08-12'
+  source: catalog MCP census

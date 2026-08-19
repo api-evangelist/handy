@@ -1,0 +1,256 @@
+{
+  "item": [
+    {
+      "id": "64685ef5-6048-4119-8bce-8f46f761c2ed",
+      "name": "Testing",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "82fa5f94-12a8-4ff6-95ee-c4362becc636",
+          "name": "Display passed params",
+          "request": {
+            "name": "Display passed params",
+            "description": {
+              "content": "Use this endpoint to ensure that request signing is correctly implemented.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                "echo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Your assigned partner ID",
+                "key": "HDY-PARTNER-ID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Seconds since epoch UTC",
+                "key": "HDY-TIMESTAMP",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                "key": "HDY-SIGNATURE",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0dcc0a92-82cc-46b0-a9d1-654d88919690",
+              "name": "success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "orders",
+                    "echo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Your assigned partner ID",
+                    "key": "HDY-PARTNER-ID",
+                    "value": "partner_name"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Seconds since epoch UTC",
+                    "key": "HDY-TIMESTAMP",
+                    "value": "1525361611"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                    "key": "HDY-SIGNATURE",
+                    "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"test\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "204a8686-8907-4679-8224-bcb158da8b74",
+          "name": "Display passed params",
+          "request": {
+            "name": "Display passed params",
+            "description": {
+              "content": "Use this endpoint to ensure that request signing is correctly implemented.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                "echo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Your assigned partner ID",
+                "key": "HDY-PARTNER-ID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Seconds since epoch UTC",
+                "key": "HDY-TIMESTAMP",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                "key": "HDY-SIGNATURE",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1fc539a8-bbe1-41c0-b09a-ced0d6f19734",
+              "name": "success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "orders",
+                    "echo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Your assigned partner ID",
+                    "key": "HDY-PARTNER-ID",
+                    "value": "partner_name"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Seconds since epoch UTC",
+                    "key": "HDY-TIMESTAMP",
+                    "value": "1525361611"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                    "key": "HDY-SIGNATURE",
+                    "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"test\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://partners.services.handy.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "73c6ed0e-27f6-4771-b042-7bc9d420bde9",
+    "name": "Handy’s Partner Bookings Testing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "<p>The Handy Partner API offers retailers fixed price installation\nservices that can be added to their eCommerce site or in-store checkout experience.\nTo start using the Handy Partner API, contact partners-eng@handy.com in order to\n        get access to the Sandbox.</p>\n        <p>Once you are ready to move to prod, we will walk you through quick authentication steps.</p>",
+      "type": "text/plain"
+    }
+  }
+}

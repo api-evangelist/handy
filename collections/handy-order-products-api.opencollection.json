@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Handy’s Partner Bookings Order Products API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Order Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "DESTROY",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/orders/products/:id",
+            "headers": [
+              {
+                "name": "HDY-PARTNER-ID",
+                "value": "partner_name"
+              },
+              {
+                "name": "HDY-TIMESTAMP",
+                "value": "1525361611"
+              },
+              {
+                "name": "HDY-SIGNATURE",
+                "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "1234567890",
+                "type": "path",
+                "description": "Order product external_id"
+              },
+              {
+                "name": "reason",
+                "value": "partner_returned_item",
+                "type": "query",
+                "description": "This is optional. It indicates the reason for cancelling the order. Default is `partner_returned_item`."
+              }
+            ]
+          },
+          "docs": "Cancel the booking created by the order request. It finds the order using the **external id** of product. This external id corresponds to the `order_product_id` provided when the order gets created. For multi-line orders it cancels all the bookings related to the order, no matter which `order_product_id` is provided. \n\n No webhooks are sent if the cancellation is successful. If the cancellation happens within 24 hours of the start time a cancellation fee is charged. \n\n Reason can be provided in "
+        },
+        {
+          "info": {
+            "name": "CANCEL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/orders/:partner_order_id/line_items/:line_no/cancel",
+            "headers": [
+              {
+                "name": "HDY-PARTNER-ID",
+                "value": "partner_name"
+              },
+              {
+                "name": "HDY-TIMESTAMP",
+                "value": "1525361611"
+              },
+              {
+                "name": "HDY-SIGNATURE",
+                "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+              }
+            ],
+            "params": [
+              {
+                "name": "partner_order_id",
+                "value": "1234567890",
+                "type": "path",
+                "description": "Order external_id"
+              },
+              {
+                "name": "line_no",
+                "value": "1",
+                "type": "path",
+                "description": "Order product line_number"
+              },
+              {
+                "name": "reason",
+                "value": "partner_returned_item",
+                "type": "query",
+                "description": "A reason for cancellation (optional)"
+              }
+            ]
+          },
+          "docs": "Cancel the booking given the `line_item` and `partner_order_id`. For multi-line bookings it cancels all the associated products given the correct `partner_order_id` and `line_item`. The behavior of this endpoint is the same as the DESTROY one above. \n\n No webhooks are sent if the cancellation is successful. If the cancellation happens within 24 hours of the start time a cancellation fee is charged. \n\n Reason can be provided in the request body optionally. Reason must be one of `['partner_deliver"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

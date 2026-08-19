@@ -1,0 +1,781 @@
+{
+  "item": [
+    {
+      "id": "6b098f09-3157-448a-9e7f-8c1448ddd0b7",
+      "name": "Order Products",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "628337a2-21f0-43e4-9785-0b35271bef3c",
+          "name": "DESTROY",
+          "request": {
+            "name": "DESTROY",
+            "description": {
+              "content": "Cancel the booking created by the order request. It finds the order using the **external id** of product. This external id corresponds to the `order_product_id` provided when the order gets created. For multi-line orders it cancels all the bookings related to the order, no matter which `order_product_id` is provided. \n\n No webhooks are sent if the cancellation is successful. If the cancellation happens within 24 hours of the start time a cancellation fee is charged. \n\n Reason can be provided in the request body optionally. Reason must be one of `['partner_delivery_delayed', 'partner_damaged_product', 'partner_self_assembled', 'partner_returned_item', 'partner_missing_pieces', 'reschedule_consolidation']`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                "products",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "reason",
+                  "value": "<string>",
+                  "description": "This is optional. It indicates the reason for cancelling the order. Default is `partner_returned_item`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Order product external_id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Your assigned partner ID",
+                "key": "HDY-PARTNER-ID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Seconds since epoch UTC",
+                "key": "HDY-TIMESTAMP",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                "key": "HDY-SIGNATURE",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97afc7a5-89aa-4bf1-a53b-dfeef8a342ea",
+              "name": "Order Booking(product) cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "orders",
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reason",
+                      "value": "partner_returned_item"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Order product external_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Your assigned partner ID",
+                    "key": "HDY-PARTNER-ID",
+                    "value": "partner_name"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Seconds since epoch UTC",
+                    "key": "HDY-TIMESTAMP",
+                    "value": "1525361611"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                    "key": "HDY-SIGNATURE",
+                    "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"order_product_id\": \"wv3r2o7el14gj06\",\n  \"partner_order_id\": \"110001023\",\n  \"order_date\": \"2018-10-22T12:11:50.000Z\",\n  \"booking_id\": \"dj327393v614875\",\n  \"sku\": \"HANDY1234\",\n  \"name\": \"Product name\",\n  \"quantity\": 1,\n  \"line_number\": 1,\n  \"charge_amount_in_cents\": 7853,\n  \"charge_currency\": \"string\",\n  \"product_status\": \"complete\",\n  \"delivery_date\": \"2018-07-26\",\n  \"service_date\": \"2018-07-26\",\n  \"service_datetime\": \"2018-05-02T22:21:49.000Z\",\n  \"error\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a16ba8a9-8ceb-42d0-9438-58f05fc3df86",
+              "name": "Reason not found if reason provided is not in the list above",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "orders",
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reason",
+                      "value": "partner_returned_item"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Order product external_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Your assigned partner ID",
+                    "key": "HDY-PARTNER-ID",
+                    "value": "partner_name"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Seconds since epoch UTC",
+                    "key": "HDY-TIMESTAMP",
+                    "value": "1525361611"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                    "key": "HDY-SIGNATURE",
+                    "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Reason not found\",\n  \"code\": \"invalid_request_parameter\",\n  \"error_uuid\": \"90938b23-749f-4f66-972b-43ea3a7ca7f6\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e817fdc-bda7-4ee5-9a49-5385a21869cf",
+              "name": "Order product not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "orders",
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reason",
+                      "value": "partner_returned_item"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Order product external_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Your assigned partner ID",
+                    "key": "HDY-PARTNER-ID",
+                    "value": "partner_name"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Seconds since epoch UTC",
+                    "key": "HDY-TIMESTAMP",
+                    "value": "1525361611"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                    "key": "HDY-SIGNATURE",
+                    "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The order was not found.\",\n  \"code\": \"order_not_found\",\n  \"error_uuid\": \"90938b23-749f-4f66-972b-43ea3a7ca7f6\",\n  \"more_info\": \"The order was not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c207bd0d-194a-48af-8f2f-7fb69083d842",
+              "name": "Booking has already been completed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "orders",
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reason",
+                      "value": "partner_returned_item"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Order product external_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Your assigned partner ID",
+                    "key": "HDY-PARTNER-ID",
+                    "value": "partner_name"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Seconds since epoch UTC",
+                    "key": "HDY-TIMESTAMP",
+                    "value": "1525361611"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                    "key": "HDY-SIGNATURE",
+                    "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Booking has already been completed.\",\n  \"code\": \"booking_cannot_be_cancelled\",\n  \"error_uuid\": \"90938b23-749f-4f66-972b-43ea3a7ca7f6\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e63e04f-f36a-4a41-a81f-c94f8279836b",
+          "name": "CANCEL",
+          "request": {
+            "name": "CANCEL",
+            "description": {
+              "content": "Cancel the booking given the `line_item` and `partner_order_id`. For multi-line bookings it cancels all the associated products given the correct `partner_order_id` and `line_item`. The behavior of this endpoint is the same as the DESTROY one above. \n\n No webhooks are sent if the cancellation is successful. If the cancellation happens within 24 hours of the start time a cancellation fee is charged. \n\n Reason can be provided in the request body optionally. Reason must be one of `['partner_delivery_delayed', 'partner_damaged_product', 'partner_self_assembled', 'partner_returned_item', 'partner_missing_pieces', 'reschedule_consolidation']`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                ":partner_order_id",
+                "line_items",
+                ":line_no",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "reason",
+                  "value": "",
+                  "description": "A reason for cancellation (optional)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "partner_order_id",
+                  "description": "(Required) Order external_id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "line_no",
+                  "description": "(Required) Order product line_number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Your assigned partner ID",
+                "key": "HDY-PARTNER-ID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Seconds since epoch UTC",
+                "key": "HDY-TIMESTAMP",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                "key": "HDY-SIGNATURE",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "45c9ddd1-289e-487b-9367-edc65e9d97f0",
+              "name": "Order Booking(product) cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "orders",
+                    ":partner_order_id",
+                    "line_items",
+                    ":line_no",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reason",
+                      "value": "partner_returned_item"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "partner_order_id",
+                      "description": "(Required) Order external_id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "line_no",
+                      "description": "(Required) Order product line_number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Your assigned partner ID",
+                    "key": "HDY-PARTNER-ID",
+                    "value": "partner_name"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Seconds since epoch UTC",
+                    "key": "HDY-TIMESTAMP",
+                    "value": "1525361611"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                    "key": "HDY-SIGNATURE",
+                    "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"order_product_id\": \"wv3r2o7el14gj06\",\n  \"partner_order_id\": \"110001023\",\n  \"order_date\": \"2018-10-22T12:11:50.000Z\",\n  \"booking_id\": \"dj327393v614875\",\n  \"sku\": \"HANDY1234\",\n  \"name\": \"Product name\",\n  \"quantity\": 1,\n  \"line_number\": 1,\n  \"charge_amount_in_cents\": 7853,\n  \"charge_currency\": \"string\",\n  \"product_status\": \"complete\",\n  \"delivery_date\": \"2018-07-26\",\n  \"service_date\": \"2018-07-26\",\n  \"service_datetime\": \"2018-05-02T22:21:49.000Z\",\n  \"error\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3ee9e13-459b-48ea-abe8-45fb109165b9",
+              "name": "Reason not found if reason provided is not in the list above",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "orders",
+                    ":partner_order_id",
+                    "line_items",
+                    ":line_no",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reason",
+                      "value": "partner_returned_item"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "partner_order_id",
+                      "description": "(Required) Order external_id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "line_no",
+                      "description": "(Required) Order product line_number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Your assigned partner ID",
+                    "key": "HDY-PARTNER-ID",
+                    "value": "partner_name"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Seconds since epoch UTC",
+                    "key": "HDY-TIMESTAMP",
+                    "value": "1525361611"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                    "key": "HDY-SIGNATURE",
+                    "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Reason not found\",\n  \"code\": \"invalid_request_parameter\",\n  \"error_uuid\": \"90938b23-749f-4f66-972b-43ea3a7ca7f6\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2716fb8a-f1b6-4345-af18-a7bde74fbc90",
+              "name": "Order or Order product line_number not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "orders",
+                    ":partner_order_id",
+                    "line_items",
+                    ":line_no",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reason",
+                      "value": "partner_returned_item"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "partner_order_id",
+                      "description": "(Required) Order external_id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "line_no",
+                      "description": "(Required) Order product line_number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Your assigned partner ID",
+                    "key": "HDY-PARTNER-ID",
+                    "value": "partner_name"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Seconds since epoch UTC",
+                    "key": "HDY-TIMESTAMP",
+                    "value": "1525361611"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                    "key": "HDY-SIGNATURE",
+                    "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Order Order product line_number not found\",\n  \"code\": \"order_product_not_found\",\n  \"error_uuid\": \"90938b23-749f-4f66-972b-43ea3a7ca7f6\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18884d66-5c27-4c9d-9d3c-dddaaf5613aa",
+              "name": "Booking has already been completed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "orders",
+                    ":partner_order_id",
+                    "line_items",
+                    ":line_no",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reason",
+                      "value": "partner_returned_item"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "partner_order_id",
+                      "description": "(Required) Order external_id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "line_no",
+                      "description": "(Required) Order product line_number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Your assigned partner ID",
+                    "key": "HDY-PARTNER-ID",
+                    "value": "partner_name"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Seconds since epoch UTC",
+                    "key": "HDY-TIMESTAMP",
+                    "value": "1525361611"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Signature generated using your private key.\nClick <a href='https://github.com/Handybook/API-Request-Signing' target='_blank'>here</a> to learn how.",
+                    "key": "HDY-SIGNATURE",
+                    "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Booking has already been completed.\",\n  \"code\": \"booking_cannot_be_cancelled\",\n  \"error_uuid\": \"90938b23-749f-4f66-972b-43ea3a7ca7f6\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://partners.services.handy.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "34a85f66-2eff-48a2-a55b-62ce962d880d",
+    "name": "Handy’s Partner Bookings Order Products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "<p>The Handy Partner API offers retailers fixed price installation\nservices that can be added to their eCommerce site or in-store checkout experience.\nTo start using the Handy Partner API, contact partners-eng@handy.com in order to\n        get access to the Sandbox.</p>\n        <p>Once you are ready to move to prod, we will walk you through quick authentication steps.</p>",
+      "type": "text/plain"
+    }
+  }
+}

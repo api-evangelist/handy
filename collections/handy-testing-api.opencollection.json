@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Handy’s Partner Bookings Testing API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Testing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Display passed params",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/orders/echo",
+            "headers": [
+              {
+                "name": "HDY-PARTNER-ID",
+                "value": "partner_name"
+              },
+              {
+                "name": "HDY-TIMESTAMP",
+                "value": "1525361611"
+              },
+              {
+                "name": "HDY-SIGNATURE",
+                "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+              }
+            ]
+          },
+          "docs": "Use this endpoint to ensure that request signing is correctly implemented."
+        },
+        {
+          "info": {
+            "name": "Display passed params",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/orders/echo",
+            "headers": [
+              {
+                "name": "HDY-PARTNER-ID",
+                "value": "partner_name"
+              },
+              {
+                "name": "HDY-TIMESTAMP",
+                "value": "1525361611"
+              },
+              {
+                "name": "HDY-SIGNATURE",
+                "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+              }
+            ]
+          },
+          "docs": "Use this endpoint to ensure that request signing is correctly implemented."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

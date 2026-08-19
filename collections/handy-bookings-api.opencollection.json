@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Handy’s Partner Bookings API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bookings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SHOW",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/bookings/:id",
+            "headers": [
+              {
+                "name": "HDY-PARTNER-ID",
+                "value": "partner_name"
+              },
+              {
+                "name": "HDY-TIMESTAMP",
+                "value": "1525361611"
+              },
+              {
+                "name": "HDY-SIGNATURE",
+                "value": "OF5xI0LbLXHkFBLyNa8l..XHk="
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "dj327393v614875",
+                "type": "path",
+                "description": "The Booking's id"
+              }
+            ]
+          },
+          "docs": "This endpoint provides information for a booking which has been scheduled for an Angi service.\n It takes in a booking ID as a path parameter and returns details about this booking. \nThe booking ID associated with a purchased service can be retrieved using the following endpoints:\n* [/api/v1/orders/{partner_order_id}](#tag/Orders/paths/~1api~1v1~1orders~1{partner_order_id}/get) \n* [/api/v1/orders](#tag/Orders/paths/~1api~1v1~1orders/get)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
