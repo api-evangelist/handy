@@ -40,6 +40,19 @@ tags:
 - Installations
 - On-Demand
 - Gig Economy
+- Order
+- Webhook
+- Retail
+- Angi
+tags_raw:
+- Company
+- Home Services
+- Marketplace
+- Cleaning
+- Handyman
+- Installations
+- On-Demand
+- Gig Economy
 - Orders
 - Webhooks
 - Retail
@@ -83,6 +96,8 @@ apis:
   humanURL: https://partners.services.handy.com/docs/orders_api
   baseURL: https://partners.services.handy.com/api/v1
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
