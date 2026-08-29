@@ -142,6 +142,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/handy-capability-edges.yml
+  name: handy Business Capability Map
 - type: AgenticAccess
   url: agentic-access/handy-agentic-access.yml
 - type: DeveloperPortal
