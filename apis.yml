@@ -76,6 +76,8 @@ apis:
   humanURL: https://partners.services.handy.com/docs/orders_api
   baseURL: https://partners.services.handy.com/api/v1
   tags:
+  - Booking
+  tags_raw:
   - Bookings
   properties:
   - type: OpenAPI
