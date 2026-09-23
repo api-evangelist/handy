@@ -1,10 +1,7 @@
 {
   "provider": "handy",
   "sources": [
-    "handy-bookings-api-openapi.yml",
-    "handy-order-products-api-openapi.yml",
-    "handy-orders-api-openapi.yml",
-    "handy-testing-api-openapi.yml"
+    "_original/handy-orders-openapi.json"
   ],
   "outputs": [
     "handy-bookings-api-openapi.yml",
@@ -15,6 +12,19 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "handy-orders-openapi.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "handy-orders-openapi.json: declared missing tag: Bookings",
+    "handy-orders-openapi.json: declared missing tag: Order Products",
+    "handy-orders-openapi.json: declared missing tag: Orders",
+    "handy-orders-openapi.json: declared missing tag: Testing",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "handy-bookings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "handy-order-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "handy-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "handy-testing-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
