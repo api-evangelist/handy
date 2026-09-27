@@ -260,6 +260,13 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    sku:
+      type: string
+      example: HANDY1234
+      description: The product identifier that has been allocated to the product you are submitting on this order request.
+    error_uuid:
+      type: string
+      example: 90938b23-749f-4f66-972b-43ea3a7ca7f6
     order_product_response_cancel_product:
       type: object
       properties:
@@ -328,10 +335,3 @@ components:
       - sku
       - name
       - quantity
-    error_uuid:
-      type: string
-      example: 90938b23-749f-4f66-972b-43ea3a7ca7f6
-    sku:
-      type: string
-      example: HANDY1234
-      description: The product identifier that has been allocated to the product you are submitting on this order request.

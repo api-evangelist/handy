@@ -131,21 +131,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    provider:
-      type: object
-      properties:
-        id:
-          type: string
-          example: jxyzrlmjx931gl2
-          description: This is the unique identifier for the provider.
-        name:
-          type: string
-          example: John G.
-          description: This is the name of the provider.
-        profile_url:
-          type: string
-          example: https://www.handy.com/profiles/JOHN0840
-          description: This is a URL to the provider's profile.
     error_uuid:
       type: string
       example: 90938b23-749f-4f66-972b-43ea3a7ca7f6
@@ -186,3 +171,18 @@ components:
       - starts_at
       - time_zone
       - user_id
+    provider:
+      type: object
+      properties:
+        id:
+          type: string
+          example: jxyzrlmjx931gl2
+          description: This is the unique identifier for the provider.
+        name:
+          type: string
+          example: John G.
+          description: This is the name of the provider.
+        profile_url:
+          type: string
+          example: https://www.handy.com/profiles/JOHN0840
+          description: This is a URL to the provider's profile.
