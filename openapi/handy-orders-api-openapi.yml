@@ -986,6 +986,285 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    product_info:
+      type: object
+      description: The information passed in this object will be used to create order product reference objects within our system. These references are then used to provide descriptions to the pro that is completing the service.
+      properties:
+        product_name:
+          type: string
+          example: A nice chair
+        product_category:
+          type: string
+          example: built_from_recycled_materials
+          description: A short text string to aid in grouping products in reporting (optional)
+        product_weight_in_lbs:
+          type: integer
+          example: '50'
+          description: The weight of the product in pounds (optional)
+      required:
+      - product_name
+    order_product_response:
+      type: object
+      properties:
+        order_product_id:
+          type: string
+          example: wv3r2o7el14gj06
+        partner_order_id:
+          type: string
+          example: '110001023'
+        order_date:
+          type: string
+          example: '2018-10-22T12:11:50.000Z'
+        booking_id:
+          type: string
+          example: dj327393v614875
+        sku:
+          $ref: '#/components/schemas/sku'
+        name:
+          type: string
+          example: Product name
+        line_number:
+          type:
+          - integer
+          - 'null'
+          example: 1
+        quantity:
+          type: integer
+          example: 1
+        charge_amount_in_cents:
+          type:
+          - integer
+          - 'null'
+        charge_currency:
+          type:
+          - string
+          - 'null'
+        product_status:
+          type: string
+          example: complete
+        delivery_date:
+          type:
+          - string
+          - 'null'
+          example: '2018-07-26'
+        service_date:
+          type:
+          - string
+          - 'null'
+          example: '2018-07-26'
+        service_datetime:
+          type:
+          - string
+          - 'null'
+          example: '2018-05-02T22:21:49.000Z'
+        error:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - order_product_id
+      - partner_order_id
+      - order_date
+      - booking_id
+      - sku
+      - name
+      - quantity
+    order_creation_params:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/user'
+        address:
+          $ref: '#/components/schemas/address'
+        order:
+          $ref: '#/components/schemas/order'
+      required:
+      - user
+      - address
+      - order
+    recent_orders_product_responses:
+      type: array
+      items:
+        $ref: '#/components/schemas/recent_order_product_response'
+    user:
+      type: object
+      description: Details about the user that the order is being created for.
+      properties:
+        email:
+          type: string
+          example: example@handy.com
+          description: Email address of the user the order is being created for.
+        first_name:
+          type: string
+          example: John
+        last_name:
+          type: string
+          example: Doe
+        phone_number:
+          type: string
+          example: '2153214455'
+      required:
+      - first_name
+      - last_name
+      - phone_number
+      - email
+    update_order_req_body:
+      type: object
+      description: Information about the order to update.
+      properties:
+        partner_order_id:
+          description: This is optional. Be sure to put the `partner_order_id` in the path parameter, that one is required.
+          type: string
+          example: '110001023'
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              sku:
+                $ref: '#/components/schemas/sku'
+              order_details:
+                $ref: '#/components/schemas/order_details_update'
+              scheduling_details:
+                $ref: '#/components/schemas/scheduling_details'
+    order:
+      type: object
+      description: Information about the order to create.
+      properties:
+        partner_order_id:
+          type: string
+          example: '110001023'
+        metadata:
+          $ref: '#/components/schemas/metadata'
+        products:
+          $ref: '#/components/schemas/products'
+      required:
+      - partner_order_id
+      - products
+    product_responses:
+      type: array
+      items:
+        $ref: '#/components/schemas/order_product_response'
+    metadata:
+      type: object
+      description: Hash for partner specific information. This is used when partners are using the optional PartnerPurchaseOrder data mapping. Passing in `purchase_order_number` as a property of this object will create a database record relationship between the passed in `purchase_order_number`, the `partner_order_id` and the `partner` itself.
+    scheduling_details:
+      type: object
+      description: This is the recommended object where scheduling datetime should be passed in when creating an order. If no datetime is provided in this object or in the properties within the `order_details` object, a Smart Scheduler algorithm will be used to determine an optimal service date based on buffers and specific partner configurations.
+      properties:
+        date_type:
+          type: string
+          enum:
+          - delivery_date
+          - service_date
+          - service_datetime
+          - customer_local_datetime
+          example: customer_local_datetime
+          description: The type of date for which is being passed in. `delivery_date` will schedule the booking by adding the delivery date buffer for the partner to the date passed in. `service_date` will schedule the booking for the date passed in, and a time will be chosen based on pro availability. `service_datetime` will schedule the booking for the date and time that is passed in (UTC). `customer_local_datetime` will schedule the booking for the date and time passed in using the timezone requested.
+        date:
+          type: string
+          example: '2018-05-02T22:21:49.000'
+          description: The date value corresponding to the listed 'date_type'
+      required:
+      - date_type
+      - date
+    order_response:
+      type: object
+      properties:
+        partner_order_id:
+          type: string
+          example: '110001023'
+        user_id:
+          type: string
+          example: xzvdfhryhbdbe
+        address_id:
+          type: string
+          example: sfgethrethrt
+        products:
+          $ref: '#/components/schemas/product_responses'
+        created_at:
+          type: string
+          example: '2018-05-02T22:21:49.000Z'
+        processing_status:
+          type: string
+          example: complete
+        partner_machine_name:
+          type: string
+          example: partner_name
+        metadata:
+          type:
+          - object
+          - 'null'
+          description: Metadata that was passed in by the partner.
+      required:
+      - partner_order_id
+      - user_id
+      - address_id
+      - products
+    order_details:
+      type: object
+      properties:
+        quantity:
+          type: integer
+          example: 1
+        delivery_date:
+          type: string
+          example: '2018-07-26'
+          description: Passing in the date here works, but we recommended putting the `delivery_date` in the `scheduling_details` object (see below). The delivery date of the item associated with the order. The booking will be scheduled on an optimal date after the delivery_date.
+        service_date:
+          type: string
+          example: '2018-07-26'
+          description: Passing in the date here works, but we recommended putting the `service_date` in the `scheduling_details` object (see below). The required date of the booking. The booking will be scheduled at an optimal time on the service_date.
+        service_datetime:
+          type: string
+          example: '2018-05-02T22:21:49.000Z'
+          description: Passing in the datetime here works, but we recommended putting the `service_datetime` in the `scheduling_details` object (see below). The required datetime of the booking. The booking will be scheduled at exactly the time specified by service_datetime.
+        price_amount_in_cents:
+          type: integer
+          example: '10099'
+          description: Price in cents charged to the customer by the retailer
+        charge_amount_in_cents:
+          type: integer
+          example: '9099'
+          description: Price in cents to be paid to Handy by the retailer
+        charge_currency:
+          type: string
+          example: USD
+          description: The 3-letter ISO 4217 currency code for the transaction
+        line_number:
+          type: string
+          example: '1'
+          description: An identifier for a particular product in the order
+      required:
+      - quantity
+    order_details_update:
+      type: object
+      properties:
+        line_number:
+          type: string
+          example: '1'
+          description: An identifier for a particular product in the order
+      required:
+      - line_number
+    products:
+      description: An array of products associated with the order. A booking is made for each product except in cases of order consolidation. For example, if two products have a SKU that will trigger the same service, our scheduling algorithm will attempt to combine these services into a consolidated booking. This also applies to future partner orders that are sent for the same consumer with SKUs that can be combined with existing services that have not been completed yet.
+      type: array
+      items:
+        type: object
+        properties:
+          sku:
+            $ref: '#/components/schemas/sku'
+          product_info:
+            $ref: '#/components/schemas/product_info'
+          order_details:
+            $ref: '#/components/schemas/order_details'
+          scheduling_details:
+            $ref: '#/components/schemas/scheduling_details'
+        required:
+        - sku
+        - product_info
+        - order_details
     recent_order_product_response:
       type: object
       properties:
@@ -1059,81 +1338,6 @@ components:
           - 'null'
           example: null
           description: Because there are often multiple products on a single order, there are scenarios where one product may successfully create a service and another fails. This is indicated in the `processing_status` of the parent order as `partial`. If the `product_status` of this order product is `failure` or `completed`, the context of this status will be provided in this `error` field. It gives more details around why this particular order product failed.
-    error_uuid:
-      type: string
-      example: 90938b23-749f-4f66-972b-43ea3a7ca7f6
-    products:
-      description: An array of products associated with the order. A booking is made for each product except in cases of order consolidation. For example, if two products have a SKU that will trigger the same service, our scheduling algorithm will attempt to combine these services into a consolidated booking. This also applies to future partner orders that are sent for the same consumer with SKUs that can be combined with existing services that have not been completed yet.
-      type: array
-      items:
-        type: object
-        properties:
-          sku:
-            $ref: '#/components/schemas/sku'
-          product_info:
-            $ref: '#/components/schemas/product_info'
-          order_details:
-            $ref: '#/components/schemas/order_details'
-          scheduling_details:
-            $ref: '#/components/schemas/scheduling_details'
-        required:
-        - sku
-        - product_info
-        - order_details
-    order_details:
-      type: object
-      properties:
-        quantity:
-          type: integer
-          example: 1
-        delivery_date:
-          type: string
-          example: '2018-07-26'
-          description: Passing in the date here works, but we recommended putting the `delivery_date` in the `scheduling_details` object (see below). The delivery date of the item associated with the order. The booking will be scheduled on an optimal date after the delivery_date.
-        service_date:
-          type: string
-          example: '2018-07-26'
-          description: Passing in the date here works, but we recommended putting the `service_date` in the `scheduling_details` object (see below). The required date of the booking. The booking will be scheduled at an optimal time on the service_date.
-        service_datetime:
-          type: string
-          example: '2018-05-02T22:21:49.000Z'
-          description: Passing in the datetime here works, but we recommended putting the `service_datetime` in the `scheduling_details` object (see below). The required datetime of the booking. The booking will be scheduled at exactly the time specified by service_datetime.
-        price_amount_in_cents:
-          type: integer
-          example: '10099'
-          description: Price in cents charged to the customer by the retailer
-        charge_amount_in_cents:
-          type: integer
-          example: '9099'
-          description: Price in cents to be paid to Handy by the retailer
-        charge_currency:
-          type: string
-          example: USD
-          description: The 3-letter ISO 4217 currency code for the transaction
-        line_number:
-          type: string
-          example: '1'
-          description: An identifier for a particular product in the order
-      required:
-      - quantity
-    order:
-      type: object
-      description: Information about the order to create.
-      properties:
-        partner_order_id:
-          type: string
-          example: '110001023'
-        metadata:
-          $ref: '#/components/schemas/metadata'
-        products:
-          $ref: '#/components/schemas/products'
-      required:
-      - partner_order_id
-      - products
-    product_responses:
-      type: array
-      items:
-        $ref: '#/components/schemas/order_product_response'
     address:
       type: object
       description: The address of where the service will be performed.
@@ -1163,10 +1367,13 @@ components:
       - address1
       - address2
       - zipcode
-    recent_orders_product_responses:
-      type: array
-      items:
-        $ref: '#/components/schemas/recent_order_product_response'
+    error_uuid:
+      type: string
+      example: 90938b23-749f-4f66-972b-43ea3a7ca7f6
+    sku:
+      type: string
+      example: HANDY1234
+      description: The product identifier that has been allocated to the product you are submitting on this order request.
     recent_orders_response:
       type: object
       properties:
@@ -1198,210 +1405,6 @@ components:
           description: The unique partner name given to the partner (same one that is used in the HTTP headers).
         metadata:
           $ref: '#/components/schemas/metadata'
-    update_order_req_body:
-      type: object
-      description: Information about the order to update.
-      properties:
-        partner_order_id:
-          description: This is optional. Be sure to put the `partner_order_id` in the path parameter, that one is required.
-          type: string
-          example: '110001023'
-        products:
-          type: array
-          items:
-            type: object
-            properties:
-              sku:
-                $ref: '#/components/schemas/sku'
-              order_details:
-                $ref: '#/components/schemas/order_details_update'
-              scheduling_details:
-                $ref: '#/components/schemas/scheduling_details'
-    order_creation_params:
-      type: object
-      properties:
-        user:
-          $ref: '#/components/schemas/user'
-        address:
-          $ref: '#/components/schemas/address'
-        order:
-          $ref: '#/components/schemas/order'
-      required:
-      - user
-      - address
-      - order
-    sku:
-      type: string
-      example: HANDY1234
-      description: The product identifier that has been allocated to the product you are submitting on this order request.
-    user:
-      type: object
-      description: Details about the user that the order is being created for.
-      properties:
-        email:
-          type: string
-          example: example@handy.com
-          description: Email address of the user the order is being created for.
-        first_name:
-          type: string
-          example: John
-        last_name:
-          type: string
-          example: Doe
-        phone_number:
-          type: string
-          example: '2153214455'
-      required:
-      - first_name
-      - last_name
-      - phone_number
-      - email
-    order_response:
-      type: object
-      properties:
-        partner_order_id:
-          type: string
-          example: '110001023'
-        user_id:
-          type: string
-          example: xzvdfhryhbdbe
-        address_id:
-          type: string
-          example: sfgethrethrt
-        products:
-          $ref: '#/components/schemas/product_responses'
-        created_at:
-          type: string
-          example: '2018-05-02T22:21:49.000Z'
-        processing_status:
-          type: string
-          example: complete
-        partner_machine_name:
-          type: string
-          example: partner_name
-        metadata:
-          type:
-          - object
-          - 'null'
-          description: Metadata that was passed in by the partner.
-      required:
-      - partner_order_id
-      - user_id
-      - address_id
-      - products
-    order_details_update:
-      type: object
-      properties:
-        line_number:
-          type: string
-          example: '1'
-          description: An identifier for a particular product in the order
-      required:
-      - line_number
-    order_product_response:
-      type: object
-      properties:
-        order_product_id:
-          type: string
-          example: wv3r2o7el14gj06
-        partner_order_id:
-          type: string
-          example: '110001023'
-        order_date:
-          type: string
-          example: '2018-10-22T12:11:50.000Z'
-        booking_id:
-          type: string
-          example: dj327393v614875
-        sku:
-          $ref: '#/components/schemas/sku'
-        name:
-          type: string
-          example: Product name
-        line_number:
-          type:
-          - integer
-          - 'null'
-          example: 1
-        quantity:
-          type: integer
-          example: 1
-        charge_amount_in_cents:
-          type:
-          - integer
-          - 'null'
-        charge_currency:
-          type:
-          - string
-          - 'null'
-        product_status:
-          type: string
-          example: complete
-        delivery_date:
-          type:
-          - string
-          - 'null'
-          example: '2018-07-26'
-        service_date:
-          type:
-          - string
-          - 'null'
-          example: '2018-07-26'
-        service_datetime:
-          type:
-          - string
-          - 'null'
-          example: '2018-05-02T22:21:49.000Z'
-        error:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - order_product_id
-      - partner_order_id
-      - order_date
-      - booking_id
-      - sku
-      - name
-      - quantity
-    scheduling_details:
-      type: object
-      description: This is the recommended object where scheduling datetime should be passed in when creating an order. If no datetime is provided in this object or in the properties within the `order_details` object, a Smart Scheduler algorithm will be used to determine an optimal service date based on buffers and specific partner configurations.
-      properties:
-        date_type:
-          type: string
-          enum:
-          - delivery_date
-          - service_date
-          - service_datetime
-          - customer_local_datetime
-          example: customer_local_datetime
-          description: The type of date for which is being passed in. `delivery_date` will schedule the booking by adding the delivery date buffer for the partner to the date passed in. `service_date` will schedule the booking for the date passed in, and a time will be chosen based on pro availability. `service_datetime` will schedule the booking for the date and time that is passed in (UTC). `customer_local_datetime` will schedule the booking for the date and time passed in using the timezone requested.
-        date:
-          type: string
-          example: '2018-05-02T22:21:49.000'
-          description: The date value corresponding to the listed 'date_type'
-      required:
-      - date_type
-      - date
-    product_info:
-      type: object
-      description: The information passed in this object will be used to create order product reference objects within our system. These references are then used to provide descriptions to the pro that is completing the service.
-      properties:
-        product_name:
-          type: string
-          example: A nice chair
-        product_category:
-          type: string
-          example: built_from_recycled_materials
-          description: A short text string to aid in grouping products in reporting (optional)
-        product_weight_in_lbs:
-          type: integer
-          example: '50'
-          description: The weight of the product in pounds (optional)
-      required:
-      - product_name
     retrieve_order_response:
       type: object
       properties:
@@ -1435,6 +1438,3 @@ components:
           - object
           - 'null'
           description: Metadata that was passed in by the partner.
-    metadata:
-      type: object
-      description: Hash for partner specific information. This is used when partners are using the optional PartnerPurchaseOrder data mapping. Passing in `purchase_order_number` as a property of this object will create a database record relationship between the passed in `purchase_order_number`, the `partner_order_id` and the `partner` itself.

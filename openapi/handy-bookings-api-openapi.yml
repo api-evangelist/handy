@@ -146,6 +146,9 @@ components:
           type: string
           example: https://www.handy.com/profiles/JOHN0840
           description: This is a URL to the provider's profile.
+    error_uuid:
+      type: string
+      example: 90938b23-749f-4f66-972b-43ea3a7ca7f6
     booking_response:
       type: object
       properties:
@@ -183,6 +186,3 @@ components:
       - starts_at
       - time_zone
       - user_id
-    error_uuid:
-      type: string
-      example: 90938b23-749f-4f66-972b-43ea3a7ca7f6
