@@ -1,0 +1,12 @@
+{
+ "url": "https://partners.services.handy.com/api-docs/orders/v1/swagger.json",
+ "requested_url": "https://partners.services.handy.com/api-docs/orders/v1/swagger.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 54158,
+ "sha256": "9f8eacd16bcebefe67e570de45b6459b68f9bdb0002be0bdc17934011435e9ba",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
