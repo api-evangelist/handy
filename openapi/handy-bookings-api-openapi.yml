@@ -186,3 +186,9 @@ components:
     error_uuid:
       type: string
       example: 90938b23-749f-4f66-972b-43ea3a7ca7f6
+x-provenance:
+  method: harvested
+  publisher: handy
+  source: https://partners.services.handy.com/api-docs/orders/v1/swagger.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
