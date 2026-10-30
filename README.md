@@ -64,6 +64,130 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-handy is a company surfaced as a portfolio company of slow-ventures and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Handy is a home-services marketplace, now part of Angi (ANGI Homeservices), that connects customers with pre-screened independent professionals for house cleaning, handyman work, furniture assembly, and in-home installations. Handy's Partner API lets retailers offer fixed-price installation and service bookings at eCommerce or in-store checkout: partners create and manage orders, products, and line items, retrieve bookings and their assigned providers, and receive booking-lifecycle webhooks. Requests are authenticated with a custom RSA-SHA256 signed-request scheme.
 
-Backed by: slow-ventures — https://handy.com
+**Areas:** Company · Home Services · Marketplace · Cleaning · Handyman · Installations · On-Demand · Gig Economy · Order · Webhook · Retail · Angi
+
+## handy on APIs.io
+
+Everything profiled for handy is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/handy/](https://apis.io/providers/handy/)** — or go straight to one of the APIs or properties below.
+
+### APIs (4)
+
+- [handy Bookings API](https://apis.io/apis/handy/handy-bookings-api/) — The Bookings API from handy — 1 operation(s) for bookings.
+- [handy Order Products API](https://apis.io/apis/handy/handy-order-products-api/) — The Order Products API from handy — 2 operation(s) for order products.
+- [handy Orders API](https://apis.io/apis/handy/handy-orders-api/) — The Orders API from handy — 2 operation(s) for orders.
+- [handy Testing API](https://apis.io/apis/handy/handy-testing-api/) — The Testing API from handy — 1 operation(s) for testing.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Handy Webhooks](https://apis.io/asyncapis/handy/handy-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [handy](https://apis.io/servers/handy/handy/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Handy Agentic Access](https://apis.io/agentic-access/handy/handy-agentic-access/)
+
+#### Collections (4)
+
+Postman and Open Collection request collections.
+
+- [Handy’s Partner Bookings API](https://apis.io/collections/handy/open-handy-bookings-api/)
+- [Handy’s Partner Bookings Order Products API](https://apis.io/collections/handy/open-handy-order-products-api/)
+- [Handy’s Partner Bookings Orders API](https://apis.io/collections/handy/open-handy-orders-api/)
+- [Handy’s Partner Bookings Testing API](https://apis.io/collections/handy/open-handy-testing-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Handy Orders Overlay](https://apis.io/overlays/handy/handy-orders-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Handy Authentication](https://apis.io/security/handy/handy-authentication/)
+- [Handy Domain Security](https://apis.io/security/handy/handy-domain-security/)
+- [Handy Vulnerability Disclosure](https://apis.io/security/handy/handy-vulnerability-disclosure/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://handy.com)
+- [Documentation](https://partners.services.handy.com/docs/orders_api)
+- [API reference](https://partners.services.handy.com/docs/orders_api)
+- [Support](https://help.handy.com/)
+- [Security](https://www.handy.com/.well-known/security.txt)
+- [Terms of service](https://www.handy.com/terms)
+- [Privacy policy](https://www.handy.com/privacy)
+- [GitHub](https://github.com/Handybook)
+
+## API Evangelist rating
+
+**Kin Score 40.9** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 54.7 |
+| Contract governance | 4.5 |
+| Operational transparency | 15.8 |
+| Developer ergonomics | 51.8 |
+| Access clarity | 21.1 |
+
+**Agent readiness 31.9** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | verified |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | — |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 30.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/handy/](https://apis.io/providers/handy/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for handy: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/handy/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
